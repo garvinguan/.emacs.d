@@ -1,0 +1,16 @@
+(setq org-log-done 'time)
+(setq org-capture-templates
+      '(
+        ("e" "Emacs Todo" entry (file+headline "~/org/todos.org" "Emacs")
+        "* TODO  %?\n  %u\n")
+        ("w" "Work Todo" entry (file+headline "~/org/todos.org" "Work")
+        "* TODO  %?")
+        ("n" "Investigate" entry (file+headline "~/org/todos.org" "Investigate")
+        "* TODO  %?")
+        ("r" "Reminder" entry (file+headline "~/org/todos.org" "Reminder")
+        "* TODO %? %a %u")
+        ("b" "Buy" checkitem (file+headline "~/org/todos.org" "Buy")
+        "[ ] %? %u")
+        ("o" "1on1" checkitem (file+headline "~/org/todos.org" "1on1")
+        "[ ] %? %u")
+        ))

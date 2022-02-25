@@ -1,0 +1,11 @@
+**/#*#
+**/*~
+
+.cache/
+.dap-breakpoints
+.lsp-session*
+bookmarks
+
+projectile-bookmarks.eld
+straight/
+transient/
