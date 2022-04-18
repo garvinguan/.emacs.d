@@ -23,7 +23,6 @@
          user-init-directory)
         (t "~/.emacs.d/")))
 
-;;;;;;;;;;;;;; Load Files ;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun load-user-file (file)
   (interactive "f")
   "Load a file in current user's configuration directory"
@@ -48,12 +47,18 @@
   :init
   (setq evil-undo-system 'undo-fu)
   (setq evil-want-keybinding nil) ;; set up for evil-collection
+  (setq-default evil-cross-lines t)
   :ensure t
   :config
   (evil-mode 1)
+  ;; Make movement keys work like they should
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+
   (use-package undo-fu)
   ;; Make horizontal movement cross lines
-  (setq-default evil-cross-lines t)
 
   (use-package evil-surround
     :ensure t
@@ -158,27 +163,30 @@
   (leader-def
       "bd" 'kill-this-buffer
       "c"  'org-capture
-      "xk" 'delete-current-buffer-file
-      "xc" 'save-buffers-kill-terminal
       "fd" 'init-file
       "ff" 'helm-find-files
+      "fn" 'load-notes-file
       "fs" 'save-buffer
+      "ft" 'load-todos-file
       "gs" 'magit-status
+      "jp" 'json-pretty-print-buffer
       "k" 'switch-to-buffer
-      "l" 'treemacs
+      "lt" 'treemacs
       "pb" 'projectile-switch-to-buffer
       "pf" 'projectile-find-file
       "pp" 'projectile-switch-project
+      "ta" 'treemacs-add-project-to-workspace
       "tl" 'toggle-truncate-lines
       "w-" 'my-split-window-horizontal
       "w/" 'my-split-window-vertical
+      "wU" 'winner-redo
       "wd" 'delete-window
       "wm" 'toggle-maximize-buffer
       "wu" 'winner-undo
-      "wU" 'winner-redo
+      "xc" 'save-buffers-kill-terminal
       "xe" 'eval-last-sexp
       "xh" 'mark-whole-buffer
-      "ta" 'treemacs-add-project-to-workspace
+      "xk" 'delete-current-buffer-file
       "1" 'winum-select-window-1
       "2" 'winum-select-window-2
       "3" 'winum-select-window-3

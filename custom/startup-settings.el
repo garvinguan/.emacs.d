@@ -13,6 +13,9 @@
 ;; Removes Splash Screen
 (setq inhibit-startup-message t)
 
+;; Empty scratch buffer
+(setq initial-scratch-message "")
+
 ;;Set title frame
 (setq frame-title-format '("best editor in existence"))
 
@@ -42,8 +45,6 @@
 
 ;;(display-time)
 (setq
-  scroll-margin 5
-  scroll-step 3
   scroll-conservatively 10000
   scroll-preserve-screen-position 1)
 

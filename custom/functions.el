@@ -1,3 +1,16 @@
+;;;;;;;;;;;;;; Load Files ;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Jump to todoes file
+(defun load-todos-file ()
+  "Edit the ~/org/todos.org in window."
+  (interactive)
+  (find-file "~/org/todos.org"))
+
+;; Jump to notes file
+(defun load-notes-file ()
+  "Edit the ~/org/notes.org in window."
+  (interactive)
+  (find-file "~/org/notes.org"))
+
 ;; Jump to Init File
 (defun init-file ()
   "Edit the `user-init-file', in window."
@@ -16,7 +29,6 @@
   (select-window (split-window-below))
   (switch-to-buffer (other-buffer)))
 
-;; C-x C-k kills file of current buffer
 (defun delete-current-buffer-file ()
   "Removes file connected to current buffer and kills buffer."
   (interactive)
