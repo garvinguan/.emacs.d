@@ -161,6 +161,7 @@
     :prefix "SPC")
   (leader-def "" nil)
   (leader-def
+      "SPC" 'helm-M-x
       "bd" 'kill-this-buffer
       "c"  'org-capture
       "fd" 'init-file
@@ -184,6 +185,7 @@
       "wm" 'toggle-maximize-buffer
       "wu" 'winner-undo
       "xc" 'save-buffers-kill-terminal
+      "xg" 'helm-projectile-rg
       "xe" 'eval-last-sexp
       "xh" 'mark-whole-buffer
       "xk" 'delete-current-buffer-file
@@ -236,7 +238,9 @@
 
 (use-package helm-rg
   :requires (helm)
-  :config (setq helm-rg-default-directory 'git-root)
+  :config
+  (setq helm-rg-default-directory 'git-root)
+  (setq helm-rg-ripgrep-executable "/usr/local/bin/rg")
   )
 (use-package helm-projectile)
 (use-package swiper-helm)
@@ -324,7 +328,11 @@
   (setq lsp-idle-delay 0.500)
   (setq lsp-log-io nil)
   (setq lsp-completion-provider :capf)
-  (setq lsp-prefer-flymake nil))
+  (setq lsp-prefer-flymake nil)
+
+  :hook
+  (web-mode . lsp)
+  (js2-mode . lsp))
 
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals)
