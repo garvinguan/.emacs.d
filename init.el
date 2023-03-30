@@ -1,3 +1,4 @@
+
 (setq-default mode-line-format (delq 'mode-line-modes mode-line-format))
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -41,6 +42,9 @@
   (setq winum-auto-assign-0-to-minibuffer t
         winum-auto-setup-mode-line t
         winum-scope 'frame-local))
+
+;; String inflection
+(use-package string-inflection)
 
 ;;;;;;;;;;Evil;;;;;;;;;;;;;;
 (use-package evil
@@ -175,7 +179,7 @@
       "lt" 'treemacs
       "pb" 'projectile-switch-to-buffer
       "pf" 'projectile-find-file
-      "pp" 'projectile-switch-project
+      "pp" 'helm-projectile-switch-project
       "ta" 'treemacs-add-project-to-workspace
       "tl" 'toggle-truncate-lines
       "w-" 'my-split-window-horizontal
