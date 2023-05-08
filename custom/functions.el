@@ -87,3 +87,37 @@ BEG and END (region to sort)."
       (progn
         (window-configuration-to-register ?_)
         (delete-other-windows)))))
+
+(defun unique-lines ()
+  "Remove duplicate lines from the current buffer"
+  (interactive)
+  (let ((lines (split-string (buffer-string) "\n" t)))
+    (delete-dups lines)
+    (goto-char (point-min))
+    (delete-region (point-min) (point-max))
+    (dolist (line lines)
+      (insert line)
+      (insert "\n"))))
+
+(defun unique-lines-sort-and-wrap-in-quotes-plus-comma ()
+  "Remove duplicate lines from the current buffer, sort the lines, wrap each line in quotes, and add a comma after each line except the last."
+  (interactive)
+  (let ((lines (split-string (buffer-string) "\n" t)))
+    (setq lines (delete-dups lines))
+    (setq lines (sort lines 'string-lessp))
+    (goto-char (point-min))
+    (delete-region (point-min) (point-max))
+    (dolist (line lines)
+      (insert (concat "\"" line "\""))
+      (unless (string-equal line (car (last lines)))
+        (insert ","))
+      (insert "\n"))))
+
+(defun aggregate-count-lines-in-buffer ()
+  "Aggregate count the occurrences of each line in the current buffer."
+  (interactive)
+  (let ((output-buffer (get-buffer-create "*count-lines*")))
+    (with-current-buffer output-buffer
+      (erase-buffer))
+    (shell-command-on-region (point-min) (point-max) "sort | uniq -c | sort -rn" output-buffer)
+    (pop-to-buffer output-buffer)))
