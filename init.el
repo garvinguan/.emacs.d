@@ -322,8 +322,8 @@
 
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
-  :hook  (scala-mode . lsp)
-         (lsp-mode . lsp-lens-mode)
+  :hook  (lsp-mode . lsp-lens-mode)
+         ;; (scala-mode . lsp)
   :config
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
@@ -339,7 +339,7 @@
   (js2-mode . lsp))
 
 ;; Add metals backend for lsp-mode
-(use-package lsp-metals)
+;; (use-package lsp-metals)
 
 ;; Enable nice rendering of documentation on hover
 ;;   Warning: on some systems this package can reduce your emacs responsiveness significally.
@@ -420,6 +420,11 @@
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 (setq auto-save-file-name-transforms `((".*" "~/" t)))
 (setq create-lockfiles nil)
+
+(use-package mermaid-mode
+  :config
+  (setq mermaid-mmdc-location "/opt/homebrew/bin/mmdc")
+  )
 
 ;;;;;;;;;;;;;;; Melpa ;;;;;;;;;;;;;;;
 (setq
